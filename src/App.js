@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import testData from "./testData";
+import Form from "./components/Form";
+import CardList from "./components/CardList";
 
-function App() {
+function App({ title }) {
+  const [profiles, setProfiles] = useState(testData);
+
+  const addNewProfile = (profileData) => {
+    console.log("App", profileData);
+    setProfiles((profiles) => [...profiles, profileData]);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="header">{title}</div>
+      <Form onSubmit={addNewProfile} />
+      <CardList profiles={profiles} />
     </div>
   );
 }
